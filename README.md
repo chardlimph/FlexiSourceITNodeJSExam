@@ -38,8 +38,8 @@ DELETE|/filesystem/sessions/:id|200|Session
 
 APIs return the following HTTP codes which needs to be checked by the end user:
 
-Code|
-----|-
+Code|Message
+----|-------
 200|OK
 201|OK
 400|Validation error
