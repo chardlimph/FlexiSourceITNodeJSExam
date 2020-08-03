@@ -1,5 +1,23 @@
 # NodeJS Coding Exam
 
+## Config
+
+Configuration file config/default.json
+
+```javascript
+{
+    "mongoURI":"mongodb+srv://",
+    "mockapiURI":"https://5f27d46df5d27e001612e662.mockapi.io/",
+    "dataPath":"./data/sessions.json"
+}
+```
+
+Name|Description
+----|-----------
+"mongoURI"|MongoDB connection string
+"mockapiURI"|Mockapi.io CRUD endpoint
+"dataPath"|JSON file path
+
 
 ## Service 1: CRUD API for database transactions
 
