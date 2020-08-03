@@ -1,0 +1,22 @@
+{
+  "name": "richardlimnodejscodeexam",
+  "version": "1.0.0",
+  "description": "NodeJS coding exam",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chardlimph/FlexiSourceITNodeJSExam.git"
+  },
+  "author": "Richard A. Lim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chardlimph/FlexiSourceITNodeJSExam/issues"
+  },
+  "homepage": "https://github.com/chardlimph/FlexiSourceITNodeJSExam#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
