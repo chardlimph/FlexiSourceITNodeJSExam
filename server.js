@@ -11,6 +11,8 @@ app.get('/',(req,res) => res.send('Richard Lim - FlexiSourceIT NodeJS Code Exam 
 
 app.use('/database/sessions', require('./database/sessions'));
 
+app.use('/external/sessions', require('./external/sessions'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

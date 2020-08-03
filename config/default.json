@@ -1,3 +1,4 @@
 {
-    "mongoURI":"mongodb+srv://nodejscodingexamuser:n0d3jsc0d1ng3x4m4s3r@flexisourceitcodingexam.nxtws.mongodb.net/NodeJSExam?retryWrites=true&w=majority"
+    "mongoURI":"mongodb+srv://nodejscodingexamuser:n0d3jsc0d1ng3x4m4s3r@flexisourceitcodingexam.nxtws.mongodb.net/NodeJSExam?retryWrites=true&w=majority",
+    "mockapiURI":"https://5f27d46df5d27e001612e662.mockapi.io/"
 }

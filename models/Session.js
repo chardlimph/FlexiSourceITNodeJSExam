@@ -3,8 +3,6 @@ const autoIncrement = require('mongoose-auto-increment');
 
 autoIncrement.initialize(mongoose.connection);
 
-//const Schema = mongoose.Schema;
-
 const SessionSchema = new mongoose.Schema({
     id: {
         type: Number        
