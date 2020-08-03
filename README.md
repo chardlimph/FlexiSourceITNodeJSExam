@@ -1,16 +1,18 @@
-"# FlexiSourceIT NodeJS Coding Exam" 
-
-Service 1: CRUD API for database transactions
-
-Method	Url	                    Code	Default Response
-GET	    /database/sessions	    200	    Array<Session>
-GET	    /database/sessions/:id	200	    Session
-POST	/database/sessions	    201	    Session
-PUT	    /database/sessions/:id	200	    Session
-DELETE	/database/sessions/:id	200	    Session
+# NodeJS Coding Exam
 
 
-Service 2: CRUD API for external API transactions
+## Service 1: CRUD API for database transactions
+
+Method|Url|Code|Default Response
+------|---|----|----------------
+GET|/database/sessions|200|Array<Session>
+GET|/database/sessions/:id|200|Session
+POST|/database/sessions|201|Session
+PUT|/database/sessions/:id|200|Session
+DELETE|/database/sessions/:id|200|Session
+
+
+## Service 2: CRUD API for external API transactions
 
 Method	Url	                    Code	Default Response
 GET	    /external/sessions	    200	    Array<Session>
@@ -20,7 +22,7 @@ PUT	    /external/sessions/:id	200	    Session
 DELETE	/external/sessions/:id	200	    Session
 
 
-Service 3: CRUD API for for filesystem (saving/modifying local json files)
+## Service 3: CRUD API for for filesystem (saving/modifying local json files)
 
 Method	Url	                        Code	Default Response
 GET	    /filesystem/sessions	    200	    Array<Session>
