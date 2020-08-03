@@ -31,26 +31,26 @@ router.post('/', [
             .isEmpty()
     ]
 ], async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-        session_id,
-        user_id,
-        data
-    } = req.body;
-
-    const session = await Session.findOne({ session_id: session_id, user_id: user_id});
-
-    if (session) {
-        return res.status(404).json({ msg: 'Session already exist'});
-    }
-
     try {
-        
+
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const {
+            session_id,
+            user_id,
+            data
+        } = req.body;
+
+        const session = await Session.findOne({ session_id: session_id, user_id: user_id});
+
+        if (session) {
+            return res.status(409).json({ msg: 'Session already exist'});
+        }
+
         const newSession = new Session(
             {
                 session_id: session_id,
@@ -59,9 +59,10 @@ router.post('/', [
             }
         );
 
-        const session = await newSession.save();
+        const savedSession = await newSession.save();
 
-        res.json(session);
+        res.json(savedSession);
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -80,18 +81,20 @@ router.put('/',[[
         .not()
         .isEmpty()
 ]] , async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
-    }
-
-    const {
-        session_id,
-        user_id,
-        data
-    } = req.body;
-
     try {
+
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+    
+        const {
+            session_id,
+            user_id,
+            data
+        } = req.body;
+
         const session = await Session.findOne({ session_id: session_id, user_id: user_id});
 
         if (!session) {
@@ -104,6 +107,7 @@ router.put('/',[[
         await session.save();
 
         res.json(session);
+
     } catch(err) {
         console.error(err.message);
         res.status(500).send('Server Error');

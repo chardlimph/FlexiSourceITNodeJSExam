@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     try {
         axios.get(mockapiSessionURI)
             .then(function (response) {
-                // handle success
                 res.json(response.data);
             })
             .catch(function (err) {                
@@ -32,7 +31,8 @@ router.get('/', async (req, res) => {
 // @desc   Create a session
 // @access Private
 router.post('/', [
-    [   check('session_id', 'Session Id is required')
+    [   
+        check('session_id', 'Session Id is required')
             .not()
             .isEmpty(),
         check('user_id', 'User Id is required')
@@ -40,28 +40,27 @@ router.post('/', [
             .isEmpty()
     ]
 ], async (req, res) => {
+    try {
 
-    const errors = validationResult(req);
+        const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-        session_id,
-        user_id,
-        data
-    } = req.body;
-
-    axios.get(`${mockapiSessionURI}?session_id=${session_id}&user_id=${user_id}`)
-    .then(function (response) {
-
-        if (response.data.length > 0) {
-            return res.status(404).json({ msg: 'Session already exist'});
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
 
-        try {
-            
+        const {
+            session_id,
+            user_id,
+            data
+        } = req.body;
+
+        axios.get(`${mockapiSessionURI}?session_id=${session_id}&user_id=${user_id}`)
+        .then(function (response) {
+
+            if (response.data.length > 0) {
+                return res.status(409).json({ msg: 'Session already exist'});
+            }
+
             const newSession = new Session(
                 {
                     session_id: session_id,
@@ -79,16 +78,16 @@ router.post('/', [
                 res.status(500).send('Server Error');
             });
 
-        } catch (err) {
+        })
+        .catch(function (err) {                
             console.error(err.message);
             res.status(500).send('Server Error');
-        }
-    })
-    .catch(function (err) {                
+        });
+
+    } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
-    });
-    
+    }
 });
 
 // @route  PUT external/sessions
@@ -102,42 +101,50 @@ router.put('/:id',[[
         .not()
         .isEmpty()
 ]] , async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
-    }
+    try {
 
-    const {
-        session_id,
-        user_id,
-        data
-    } = req.body;
-
-    axios.get(`${mockapiSessionURI}/${req.params.id}`)
-    .then(function (response) {
-
-        if (response.data.length == 0) {
-            return res.status(404).json({ msg: 'Session not found'});
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
         }
 
-        const session = new Session(response.data);
+        const {
+            session_id,
+            user_id,
+            data
+        } = req.body;
 
-        session.data = data;
-        session.modified_at = Date.now();
-        
-        axios.put(`${mockapiSessionURI}/${req.params.id}`, session)
+        axios.get(`${mockapiSessionURI}/${req.params.id}`)
         .then(function (response) {
-            res.json(response.data);
+
+            if (response.data.length == 0) {
+                return res.status(404).json({ msg: 'Session not found'});
+            }
+
+            const session = new Session(response.data);
+
+            session.data = data;
+            session.modified_at = Date.now();
+            
+            axios.put(`${mockapiSessionURI}/${req.params.id}`, session)
+            .then(function (response) {
+                res.json(response.data);
+            })
+            .catch(function (err) {
+                console.error(err.message);
+                res.status(500).send('Server Error');
+            });
+
         })
-        .catch(function (err) {
+        .catch(function (err) {                
             console.error(err.message);
             res.status(500).send('Server Error');
         });
-    })
-    .catch(function (err) {                
+
+    } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
-    });
+    }
 });
 
 
@@ -196,9 +203,6 @@ router.delete('/:id', async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        if (err.kind == 'ObjectId') {
-            return res.status(404).json({ msg: 'Session not found'});
-        }
         res.status(500).send('Server Error');
     }
 });

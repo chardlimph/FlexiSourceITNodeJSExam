@@ -8,10 +8,9 @@ const dataPath = require('config').get('dataPath');
 
 const _ = require('underscore');
 
-
 const Session = require('../models/Session');
 
-// @route  GET fileystem/sessions
+// @route  GET filesystem/sessions
 // @desc   Get all sessions
 // @access Private
 router.get('/', async (req, res) => {
@@ -33,11 +32,12 @@ router.get('/', async (req, res) => {
 });
 
 
-// @route  POST external/sessions
+// @route  POST filesystem/sessions
 // @desc   Create a session
 // @access Private
 router.post('/', [
-    [   check('session_id', 'Session Id is required')
+    [   
+        check('session_id', 'Session Id is required')
             .not()
             .isEmpty(),
         check('user_id', 'User Id is required')
@@ -95,7 +95,7 @@ router.post('/', [
     }
 });
 
-// @route  PUT external/sessions
+// @route  PUT filesystem/sessions
 // @desc   Update session
 // @access Private
 router.put('/:id', async (req, res) => {
@@ -147,7 +147,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// @route  GET database/sessions/:id
+// @route  GET filesystem/sessions/:id
 // @desc   Get session by ID
 // @access Private
 router.get('/:id', async (req, res) => {
@@ -178,7 +178,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// @route  DELETE external/sessions/:id
+// @route  DELETE filesystem/sessions/:id
 // @desc   Delete a session
 // @access Private
 router.delete('/:id', async (req, res) => {
@@ -212,9 +212,6 @@ router.delete('/:id', async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        if (err.kind == 'ObjectId') {
-            return res.status(404).json({ msg: 'Session not found'});
-        }
         res.status(500).send('Server Error');
     }
 });
