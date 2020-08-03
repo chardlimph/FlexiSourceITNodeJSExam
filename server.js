@@ -13,6 +13,8 @@ app.use('/database/sessions', require('./database/sessions'));
 
 app.use('/external/sessions', require('./external/sessions'));
 
+app.use('/filesystem/sessions', require('./filesystem/sessions'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));
