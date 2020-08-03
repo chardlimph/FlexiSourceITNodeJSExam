@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const autoIncrement = require('mongoose-auto-increment');
+
+autoIncrement.initialize(mongoose.connection);
+
+//const Schema = mongoose.Schema;
 
 const SessionSchema = new mongoose.Schema({
+    id: {
+        type: Number        
+    },
     session_id: {
         type: String        
     },
@@ -19,5 +26,7 @@ const SessionSchema = new mongoose.Schema({
         type: Date
     }
 });
+
+SessionSchema.plugin(autoIncrement.plugin,{ model: 'Session', field: 'id', startAt: 1 });
 
 module.exports = Session = mongoose.model('session', SessionSchema);

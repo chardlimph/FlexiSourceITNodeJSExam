@@ -72,7 +72,7 @@ router.post('/', [
 // @route  PUT database/sessions
 // @desc   Update session
 // @access Private
-router.put('/',[[    
+router.put('/',[[  
     check('session_id', 'Session Id is required')
         .not()
         .isEmpty(),
@@ -115,7 +115,7 @@ router.put('/',[[
 // @access Private
 router.get('/:id', async (req, res) => {
     try {
-        const session = await Session.findById(req.params.id);
+        const session = await Session.findOne({ id: req.params.id});
 
         if (!session) {
             return res.status(404).json({ msg: 'Session not found'});
@@ -134,8 +134,8 @@ router.get('/:id', async (req, res) => {
 // @access Private
 router.delete('/:id', async (req, res) => {
     try {
-        const session = await Session.findById(req.params.id);
-
+        const session = await Session.findOne({ id: req.params.id});
+        
         if (!session) {
             return res.status(404).json({ msg: 'Session not found'});
         }
