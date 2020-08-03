@@ -9,6 +9,8 @@ app.use(express.json({extended: false}));
 
 app.get('/',(req,res) => res.send('Richard Lim - FlexiSourceIT NodeJS Code Exam API Running'));
 
+app.use('/database/sessions', require('./database/sessions'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));
