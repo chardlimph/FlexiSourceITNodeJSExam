@@ -2,10 +2,11 @@
 
 ## Installation and usage
 
+From your Node.js command prompt execute the following command
+
 ```javascript
 
 git clone https://github.com/chardlimph/FlexiSourceITNodeJSExam.git
-
 
 cd FlexiSourceITNodeJSExam
 
