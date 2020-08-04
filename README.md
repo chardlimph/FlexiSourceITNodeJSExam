@@ -109,6 +109,7 @@ Code|Message
 200|OK
 201|OK
 400|Validation error
+401|Token is not valid
 404|Session not found
 409|Session already exist
 500|Server error
