@@ -1,5 +1,23 @@
 # NodeJS Coding Exam
 
+## Installation and usage
+
+```javascript
+
+git clone https://github.com/chardlimph/FlexiSourceITNodeJSExam.git
+
+
+cd FlexiSourceITNodeJSExam
+
+npm install
+
+npm start
+```
+
+API url is http://localhost:5000/
+
+
+
 ## Config
 
 Configuration file config/default.json
