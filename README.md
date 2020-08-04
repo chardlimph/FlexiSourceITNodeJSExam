@@ -17,7 +17,7 @@ npm start
 
 API url is http://localhost:5000/
 
-
+https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiUmljaGFyZCBMaW0iLCJyb2xlIjoiQXBwbGljYW50In0.RerWoB7TTp3NXwfcQaxCsvNqVnSotq243EEOo1UVHoI
 
 ## Config
 
@@ -36,6 +36,7 @@ Name|Description
 "mongoURI"|MongoDB connection string
 "mockapiURI"|Mockapi.io CRUD endpoint
 "dataPath"|JSON file path
+"jwtSecret"|JWT secret key for token verification
 
 
 ## Service 1: CRUD API for database transactions
@@ -69,6 +70,34 @@ GET|/filesystem/sessions/:id|200|Session
 POST|/filesystem/sessions|201|Session
 PUT|/filesystem/sessions/:id|200|Session
 DELETE|/filesystem/sessions/:id|200|Session
+
+
+## Bonus CRUD API for database transactions with JWT middleware for securing you endpoints
+
+Method|Url|Code|Default Response
+------|---|----|----------------
+GET|/secured/sessions|200|Array<Session>
+GET|/secured/sessions/:id|200|Session
+POST|/secured/sessions|201|Session
+PUT|/secured/sessions/:id|200|Session
+DELETE|/secured/sessions/:id|200|Session
+
+Sample Token 
+
+```javascript
+{
+    "x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiUmljaGFyZCBMaW0iLCJyb2xlIjoiQXBwbGljYW50In0.RerWoB7TTp3NXwfcQaxCsvNqVnSotq243EEOo1UVHoI"
+}
+```
+
+Add the above key value on your http request header
+
+
+To generate more sample token open the link below 
+
+https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiUmljaGFyZCBMaW0iLCJyb2xlIjoiQXBwbGljYW50In0.RerWoB7TTp3NXwfcQaxCsvNqVnSotq243EEOo1UVHoI
+
+In the VERIFY SIGNATURE section of the page, replace the value of 'your-256-bit-secret' textbox with 'flexisourceitnodejscodingexam'.  This is the jwtSecret value from config/default.json 
 
 
 ## RETURN CODES & ERRORS
