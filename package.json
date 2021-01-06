@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/chardlimph/FlexiSourceITNodeJSExam#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "config": "^3.3.1",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
